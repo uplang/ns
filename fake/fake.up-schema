@@ -1,0 +1,324 @@
+schema fake
+version 1.0.0
+description "Fake data generation for testing and prototyping"
+
+functions {
+  # Person functions
+  name {
+    description "Generates a random full name"
+    returns {
+      type string
+      description "Full name (e.g., 'John Doe')"
+    }
+  }
+
+  firstName {
+    description "Generates a random first name"
+    returns {
+      type string
+      description "First name"
+    }
+  }
+
+  lastName {
+    description "Generates a random last name"
+    returns {
+      type string
+      description "Last name"
+    }
+  }
+
+  email {
+    description "Generates a random email address"
+    returns {
+      type string
+      description "Email address"
+    }
+  }
+
+  phone {
+    description "Generates a random phone number"
+    returns {
+      type string
+      description "Phone number"
+    }
+  }
+
+  username {
+    description "Generates a random username"
+    returns {
+      type string
+      description "Username"
+    }
+  }
+
+  # Internet functions
+  url {
+    description "Generates a random URL"
+    returns {
+      type string
+      description "URL"
+    }
+  }
+
+  domain {
+    description "Generates a random domain name"
+    returns {
+      type string
+      description "Domain name"
+    }
+  }
+
+  ipv4 {
+    description "Generates a random IPv4 address"
+    returns {
+      type string
+      description "IPv4 address"
+    }
+  }
+
+  ipv6 {
+    description "Generates a random IPv6 address"
+    returns {
+      type string
+      description "IPv6 address"
+    }
+  }
+
+  userAgent {
+    description "Generates a random user agent string"
+    returns {
+      type string
+      description "User agent string"
+    }
+  }
+
+  # Company functions
+  company {
+    description "Generates a random company name"
+    returns {
+      type string
+      description "Company name"
+    }
+  }
+
+  jobTitle {
+    description "Generates a random job title"
+    returns {
+      type string
+      description "Job title"
+    }
+  }
+
+  # Address functions
+  address {
+    description "Generates a random street address"
+    returns {
+      type string
+      description "Street address"
+    }
+  }
+
+  city {
+    description "Generates a random city name"
+    returns {
+      type string
+      description "City name"
+    }
+  }
+
+  state {
+    description "Generates a random state name"
+    returns {
+      type string
+      description "State name"
+    }
+  }
+
+  country {
+    description "Generates a random country name"
+    returns {
+      type string
+      description "Country name"
+    }
+  }
+
+  zipCode {
+    description "Generates a random ZIP/postal code"
+    returns {
+      type string
+      description "ZIP or postal code"
+    }
+  }
+
+  latitude {
+    description "Generates a random latitude coordinate"
+    returns {
+      type float
+      description "Latitude (-90 to 90)"
+    }
+  }
+
+  longitude {
+    description "Generates a random longitude coordinate"
+    returns {
+      type float
+      description "Longitude (-180 to 180)"
+    }
+  }
+
+  # Text functions
+  word {
+    description "Generates a random word"
+    returns {
+      type string
+      description "Random word"
+    }
+  }
+
+  sentence {
+    description "Generates a random sentence"
+    parameters {
+      words {
+        type int
+        required!bool false
+        default 10
+        description "Number of words in sentence"
+      }
+    }
+    returns {
+      type string
+      description "Random sentence"
+    }
+  }
+
+  paragraph {
+    description "Generates a random paragraph"
+    parameters {
+      sentences {
+        type int
+        required!bool false
+        default 3
+        description "Number of sentences in paragraph"
+      }
+    }
+    returns {
+      type string
+      description "Random paragraph"
+    }
+  }
+
+  lorem {
+    description "Generates lorem ipsum text"
+    parameters {
+      words {
+        type int
+        required!bool false
+        default 50
+        description "Number of words to generate"
+      }
+    }
+    returns {
+      type string
+      description "Lorem ipsum text"
+    }
+  }
+
+  # Commerce functions
+  product {
+    description "Generates a random product name"
+    returns {
+      type string
+      description "Product name"
+    }
+  }
+
+  price {
+    description "Generates a random price"
+    parameters {
+      min {
+        type float
+        required!bool false
+        default 1.0
+        description "Minimum price"
+      }
+      max {
+        type float
+        required!bool false
+        default 1000.0
+        description "Maximum price"
+      }
+    }
+    returns {
+      type float
+      description "Random price"
+    }
+  }
+
+  currency {
+    description "Generates a random currency code"
+    returns {
+      type string
+      description "Currency code (e.g., 'USD', 'EUR')"
+    }
+  }
+
+  # Color functions
+  color {
+    description "Generates a random color name"
+    returns {
+      type string
+      description "Color name"
+    }
+  }
+
+  hexColor {
+    description "Generates a random hex color code"
+    returns {
+      type string
+      description "Hex color code (e.g., '#FF5733')"
+    }
+  }
+
+  # Misc functions
+  creditCard {
+    description "Generates a random credit card number"
+    parameters {
+      type {
+        type string
+        required!bool false
+        default ""
+        description "Card type (visa, mastercard, or empty for random)"
+      }
+    }
+    returns {
+      type string
+      description "Credit card number"
+    }
+    notes!2 ```
+      Warning: For testing purposes only.
+      Do not use for real financial transactions.
+      ```
+  }
+}
+
+metadata {
+  author "UP Language Team"
+  license MIT
+  repository https://github.com/uplang/ns
+
+  usage_notes!2 ```
+    Seeding:
+    - Data is pseudo-random by default
+    - Pass seed parameter for reproducible data
+    - Useful for consistent test data generation
+
+    Use Cases:
+    - Generating test data
+    - Prototyping and mocking
+    - Database seeding
+    - UI development
+    - API testing
+    ```
+}
+

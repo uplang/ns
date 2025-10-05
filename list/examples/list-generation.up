@@ -1,0 +1,29 @@
+# List Namespace Examples
+# Testing list generation with $self context
+
+!use [list, id, random]
+
+# Generate a list of items with sequence context
+users $list.generate(10, {
+  id $id.uuid
+  sequence!int $self.number
+  is_first!bool $self.first
+  is_last!bool $self.last
+  label "User $self.number of $self.count"
+  score!int $random.int(min=0, max=100)
+})
+
+# Generate numbered items
+tasks $list.generate(5, {
+  task_id!int $self.number
+  description "Task #$self.number"
+  completed!bool false
+})
+
+# List with random data
+test_data $list.generate(3, {
+  index!int $self.number
+  value!int $random.int(min=1, max=100)
+  is_even!bool $self.even
+})
+

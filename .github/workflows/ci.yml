@@ -1,0 +1,110 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  test:
+    name: Test Namespaces
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.25'
+
+    - name: Download dependencies
+      run: |
+        for ns in */; do
+          if [ -f "$ns/go.mod" ]; then
+            echo "Processing $ns"
+            cd "$ns"
+            go mod download
+            cd ..
+          fi
+        done
+
+    - name: Run tests
+      run: |
+        for ns in */; do
+          if [ -f "$ns/go.mod" ]; then
+            echo "Testing $ns"
+            cd "$ns"
+            go test -v ./...
+            cd ..
+          fi
+        done
+
+    - name: Build all namespaces
+      run: |
+        for ns in */; do
+          if [ -f "$ns/go.mod" ]; then
+            echo "Building $ns"
+            cd "$ns"
+            go build -v .
+            cd ..
+          fi
+        done
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.25'
+
+    - name: Download tool dependencies
+      run: |
+        for ns in */; do
+          if [ -f "$ns/go.mod" ]; then
+            echo "Downloading deps for $ns"
+            cd "$ns"
+            go mod download
+            cd ..
+          fi
+        done
+
+    - name: Get golangci-lint
+      run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+
+    - name: Run golangci-lint on all namespaces
+      run: |
+        for ns in */; do
+          if [ -f "$ns/go.mod" ]; then
+            echo "Linting $ns"
+            cd "$ns"
+            go run github.com/golangci/golangci-lint/cmd/golangci-lint run --timeout=5m ./...
+            cd ..
+          fi
+        done
+
+  validate-schemas:
+    name: Validate Schemas
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Check schema files
+      run: |
+        for schema in */.up-schema; do
+          if [ -f "$schema" ]; then
+            echo "Found schema: $schema"
+            # Add validation logic here when schema validator is available
+          fi
+        done
+

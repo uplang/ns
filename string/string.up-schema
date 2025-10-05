@@ -1,0 +1,353 @@
+schema string
+version 1.0.0
+description "String manipulation functions"
+
+functions {
+  upper {
+    description "Converts string to uppercase"
+    parameters {
+      s {
+        type string
+        required!bool true
+        description "Input string"
+      }
+    }
+    returns {
+      type string
+      description "Uppercase string"
+    }
+  }
+
+  lower {
+    description "Converts string to lowercase"
+    parameters {
+      s {
+        type string
+        required!bool true
+        description "Input string"
+      }
+    }
+    returns {
+      type string
+      description "Lowercase string"
+    }
+  }
+
+  title {
+    description "Converts string to title case"
+    parameters {
+      s {
+        type string
+        required!bool true
+        description "Input string"
+      }
+    }
+    returns {
+      type string
+      description "Title case string"
+    }
+  }
+
+  trim {
+    description "Removes leading and trailing whitespace"
+    parameters {
+      s {
+        type string
+        required!bool true
+        description "Input string"
+      }
+      cutset {
+        type string
+        required!bool false
+        default " \t\n\r"
+        description "Characters to trim"
+      }
+    }
+    returns {
+      type string
+      description "Trimmed string"
+    }
+  }
+
+  trimPrefix {
+    description "Removes a prefix from string"
+    parameters {
+      s {
+        type string
+        required!bool true
+        description "Input string"
+      }
+      prefix {
+        type string
+        required!bool true
+        description "Prefix to remove"
+      }
+    }
+    returns {
+      type string
+      description "String with prefix removed"
+    }
+  }
+
+  trimSuffix {
+    description "Removes a suffix from string"
+    parameters {
+      s {
+        type string
+        required!bool true
+        description "Input string"
+      }
+      suffix {
+        type string
+        required!bool true
+        description "Suffix to remove"
+      }
+    }
+    returns {
+      type string
+      description "String with suffix removed"
+    }
+  }
+
+  split {
+    description "Splits string into a list"
+    parameters {
+      s {
+        type string
+        required!bool true
+        description "Input string"
+      }
+      sep {
+        type string
+        required!bool false
+        default ","
+        description "Separator"
+      }
+    }
+    returns {
+      type list
+      description "List of substrings"
+    }
+  }
+
+  join {
+    description "Joins a list into a string"
+    parameters {
+      items {
+        type list
+        required!bool true
+        description "List of items to join"
+      }
+      sep {
+        type string
+        required!bool false
+        default ","
+        description "Separator"
+      }
+    }
+    returns {
+      type string
+      description "Joined string"
+    }
+  }
+
+  replace {
+    description "Replaces occurrences of a substring"
+    parameters {
+      s {
+        type string
+        required!bool true
+        description "Input string"
+      }
+      old {
+        type string
+        required!bool true
+        description "Substring to replace"
+      }
+      new {
+        type string
+        required!bool true
+        description "Replacement substring"
+      }
+      n {
+        type int
+        required!bool false
+        default 1
+        description "Number of replacements (n < 0 means all)"
+      }
+    }
+    returns {
+      type string
+      description "Modified string"
+    }
+  }
+
+  replaceAll {
+    description "Replaces all occurrences of a substring"
+    parameters {
+      s {
+        type string
+        required!bool true
+        description "Input string"
+      }
+      old {
+        type string
+        required!bool true
+        description "Substring to replace"
+      }
+      new {
+        type string
+        required!bool true
+        description "Replacement substring"
+      }
+    }
+    returns {
+      type string
+      description "Modified string"
+    }
+  }
+
+  contains {
+    description "Checks if string contains substring"
+    parameters {
+      s {
+        type string
+        required!bool true
+        description "Input string"
+      }
+      substr {
+        type string
+        required!bool true
+        description "Substring to find"
+      }
+    }
+    returns {
+      type bool
+      description "True if substring is found"
+    }
+  }
+
+  hasPrefix {
+    description "Checks if string starts with prefix"
+    parameters {
+      s {
+        type string
+        required!bool true
+        description "Input string"
+      }
+      prefix {
+        type string
+        required!bool true
+        description "Prefix to check"
+      }
+    }
+    returns {
+      type bool
+      description "True if string starts with prefix"
+    }
+  }
+
+  hasSuffix {
+    description "Checks if string ends with suffix"
+    parameters {
+      s {
+        type string
+        required!bool true
+        description "Input string"
+      }
+      suffix {
+        type string
+        required!bool true
+        description "Suffix to check"
+      }
+    }
+    returns {
+      type bool
+      description "True if string ends with suffix"
+    }
+  }
+
+  slice {
+    description "Extracts a substring"
+    parameters {
+      s {
+        type string
+        required!bool true
+        description "Input string"
+      }
+      start {
+        type int
+        required!bool false
+        default 0
+        description "Start index (inclusive)"
+      }
+      end {
+        type int
+        required!bool false
+        description "End index (exclusive, default: string length)"
+      }
+    }
+    returns {
+      type string
+      description "Substring"
+    }
+  }
+
+  repeat {
+    description "Repeats a string n times"
+    parameters {
+      s {
+        type string
+        required!bool true
+        description "Input string"
+      }
+      count {
+        type int
+        required!bool false
+        default 1
+        description "Number of repetitions (max 10000)"
+      }
+    }
+    returns {
+      type string
+      description "Repeated string"
+    }
+  }
+
+  reverse {
+    description "Reverses a string"
+    parameters {
+      s {
+        type string
+        required!bool true
+        description "Input string"
+      }
+    }
+    returns {
+      type string
+      description "Reversed string"
+    }
+  }
+
+  length {
+    description "Returns the length of a string"
+    parameters {
+      s {
+        type string
+        required!bool true
+        description "Input string"
+      }
+    }
+    returns {
+      type int
+      description "String length in bytes"
+    }
+  }
+}
+
+metadata {
+  author "UP Language Team"
+  license MIT
+  repository https://github.com/uplang/ns
+}
+

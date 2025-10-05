@@ -1,0 +1,154 @@
+version: 2
+
+# Multi-binary build configuration for all UP namespaces
+# Each namespace is built as a separate binary
+
+before:
+  hooks:
+    - go mod tidy -C env
+    - go mod tidy -C fake
+    - go mod tidy -C file
+    - go mod tidy -C id
+    - go mod tidy -C list
+    - go mod tidy -C math
+    - go mod tidy -C random
+    - go mod tidy -C string
+    - go mod tidy -C time
+
+builds:
+  - id: env
+    main: ./env/main.go
+    binary: env
+    dir: env
+    env:
+      - CGO_ENABLED=0
+    goos: [linux, darwin, windows]
+    goarch: [amd64, arm64]
+    ldflags:
+      - -s -w
+
+  - id: fake
+    main: ./fake/main.go
+    binary: fake
+    dir: fake
+    env:
+      - CGO_ENABLED=0
+    goos: [linux, darwin, windows]
+    goarch: [amd64, arm64]
+    ldflags:
+      - -s -w
+
+  - id: file
+    main: ./file/main.go
+    binary: file
+    dir: file
+    env:
+      - CGO_ENABLED=0
+    goos: [linux, darwin, windows]
+    goarch: [amd64, arm64]
+    ldflags:
+      - -s -w
+
+  - id: id
+    main: ./id/main.go
+    binary: id
+    dir: id
+    env:
+      - CGO_ENABLED=0
+    goos: [linux, darwin, windows]
+    goarch: [amd64, arm64]
+    ldflags:
+      - -s -w
+
+  - id: list
+    main: ./list/main.go
+    binary: list
+    dir: list
+    env:
+      - CGO_ENABLED=0
+    goos: [linux, darwin, windows]
+    goarch: [amd64, arm64]
+    ldflags:
+      - -s -w
+
+  - id: math
+    main: ./math/main.go
+    binary: math
+    dir: math
+    env:
+      - CGO_ENABLED=0
+    goos: [linux, darwin, windows]
+    goarch: [amd64, arm64]
+    ldflags:
+      - -s -w
+
+  - id: random
+    main: ./random/main.go
+    binary: random
+    dir: random
+    env:
+      - CGO_ENABLED=0
+    goos: [linux, darwin, windows]
+    goarch: [amd64, arm64]
+    ldflags:
+      - -s -w
+
+  - id: string
+    main: ./string/main.go
+    binary: string
+    dir: string
+    env:
+      - CGO_ENABLED=0
+    goos: [linux, darwin, windows]
+    goarch: [amd64, arm64]
+    ldflags:
+      - -s -w
+
+  - id: time
+    main: ./time/main.go
+    binary: time
+    dir: time
+    env:
+      - CGO_ENABLED=0
+    goos: [linux, darwin, windows]
+    goarch: [amd64, arm64]
+    ldflags:
+      - -s -w
+
+archives:
+  - id: namespaces
+    format: tar.gz
+    name_template: >-
+      up-namespaces_
+      {{- .Version }}_
+      {{- .Os }}_
+      {{- .Arch }}
+    format_overrides:
+      - goos: windows
+        format: zip
+    files:
+      - LICENSE
+      - README.md
+      - "**/*.up-schema"
+
+checksum:
+  name_template: 'checksums.txt'
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - '^ci:'
+      - Merge pull request
+      - Merge branch
+
+release:
+  github:
+    owner: uplang
+    name: ns
+  draft: false
+  prerelease: auto
+  name_template: "Namespaces v{{.Version}}"
+

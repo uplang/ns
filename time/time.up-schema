@@ -1,0 +1,217 @@
+schema time
+version 1.0.0
+description "Time manipulation and formatting functions"
+
+functions {
+  now {
+    description "Returns the current time"
+    parameters {
+      format {
+        type string
+        required!bool false
+        default "RFC3339"
+        description "Time format (Go time format or RFC3339)"
+      }
+    }
+    returns {
+      type ts
+      description "Current timestamp"
+    }
+    examples [
+      {
+        call "$time.now"
+        result "2025-10-05T12:00:00Z"
+      }
+      {
+        call "$time.now(format=\"2006-01-02\")"
+        result "2025-10-05"
+      }
+    ]
+  }
+
+  unix {
+    description "Returns the current Unix timestamp"
+    returns {
+      type int
+      description "Unix timestamp in seconds"
+    }
+    examples [
+      {
+        call "$time.unix"
+        result 1728134400
+      }
+    ]
+  }
+
+  format {
+    description "Formats a time string"
+    parameters {
+      time {
+        type ts
+        required!bool true
+        description "Time to format"
+      }
+      format {
+        type string
+        required!bool false
+        default "RFC3339"
+        description "Output format"
+      }
+      input_format {
+        type string
+        required!bool false
+        default "RFC3339"
+        description "Input format"
+      }
+    }
+    returns {
+      type string
+      description "Formatted time string"
+    }
+    examples [
+      {
+        call "$time.format(time=\"2025-10-05T12:00:00Z\", format=\"2006-01-02\")"
+        result "2025-10-05"
+      }
+    ]
+  }
+
+  parse {
+    description "Parses a time string"
+    parameters {
+      time {
+        type string
+        required!bool true
+        description "Time string to parse"
+      }
+      format {
+        type string
+        required!bool false
+        default "RFC3339"
+        description "Input format"
+      }
+    }
+    returns {
+      type ts
+      description "Parsed timestamp"
+    }
+    examples [
+      {
+        call "$time.parse(time=\"2025-10-05\", format=\"2006-01-02\")"
+        result "2025-10-05T00:00:00Z"
+      }
+    ]
+  }
+
+  add {
+    description "Adds duration to a time"
+    parameters {
+      time {
+        type ts
+        required!bool false
+        description "Time to add to (default: now)"
+      }
+      duration {
+        type dur
+        required!bool true
+        description "Duration to add (e.g., 1h, 30m, 24h)"
+      }
+    }
+    returns {
+      type ts
+      description "Result timestamp"
+    }
+    examples [
+      {
+        call "$time.add(duration=\"1h\")"
+        result "2025-10-05T13:00:00Z"
+      }
+      {
+        call "$time.add(time=\"2025-10-05T12:00:00Z\", duration=\"24h\")"
+        result "2025-10-06T12:00:00Z"
+      }
+    ]
+  }
+
+  sub {
+    description "Subtracts duration from a time"
+    parameters {
+      time {
+        type ts
+        required!bool false
+        description "Time to subtract from (default: now)"
+      }
+      duration {
+        type dur
+        required!bool true
+        description "Duration to subtract"
+      }
+    }
+    returns {
+      type ts
+      description "Result timestamp"
+    }
+    examples [
+      {
+        call "$time.sub(duration=\"1h\")"
+        result "2025-10-05T11:00:00Z"
+      }
+    ]
+  }
+
+  since {
+    description "Returns duration since a time"
+    parameters {
+      time {
+        type ts
+        required!bool true
+        description "Reference time"
+      }
+    }
+    returns {
+      type dur
+      description "Duration since the specified time"
+    }
+    examples [
+      {
+        call "$time.since(time=\"2025-10-05T11:00:00Z\")"
+        result "1h0m0s"
+      }
+    ]
+  }
+
+  until {
+    description "Returns duration until a time"
+    parameters {
+      time {
+        type ts
+        required!bool true
+        description "Reference time"
+      }
+    }
+    returns {
+      type dur
+      description "Duration until the specified time"
+    }
+    examples [
+      {
+        call "$time.until(time=\"2025-10-05T13:00:00Z\")"
+        result "1h0m0s"
+      }
+    ]
+  }
+}
+
+metadata {
+  name "Time Functions"
+  author "UP Lang Contributors"
+  license MIT
+  repository https://github.com/uplang/ns
+
+  tags [time, timestamp, duration, formatting]
+
+  requirements {
+    go_version ">=1.21"
+  }
+}
+

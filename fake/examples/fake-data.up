@@ -1,0 +1,71 @@
+# Fake Namespace Examples
+# Testing fake data generation for all categories
+
+!use [fake, id]
+
+# Person data
+person {
+  id $id.uuid
+  name $fake.name
+  first_name $fake.firstName
+  last_name $fake.lastName
+  email $fake.email
+  username $fake.username
+  phone $fake.phone
+  ssn $fake.ssn
+}
+
+# Address data
+address {
+  street $fake.address
+  city $fake.city
+  state $fake.state
+  zip $fake.zipCode
+  country $fake.country
+  latitude!float $fake.latitude
+  longitude!float $fake.longitude
+}
+
+# Company data
+company {
+  name $fake.company
+  catch_phrase $fake.catchPhrase
+  bs $fake.bs
+  job_title $fake.jobTitle
+}
+
+# Internet data
+internet {
+  url $fake.url
+  domain $fake.domainName
+  ipv4 $fake.ipv4
+  ipv6 $fake.ipv6
+  mac $fake.macAddress
+  user_agent $fake.userAgent
+}
+
+# Payment data
+payment {
+  credit_card $fake.creditCard
+  credit_card_type $fake.creditCardType
+  currency $fake.currency
+  amount!float $fake.price(min=10.0, max=1000.0)
+}
+
+# Lorem text
+content {
+  word $fake.word
+  sentence $fake.sentence
+  paragraph $fake.paragraph
+  text $fake.text(length=200)
+}
+
+# Miscellaneous
+misc {
+  color $fake.color
+  hex_color $fake.hexColor
+  uuid $fake.uuid
+  file_name $fake.fileName
+  mime_type $fake.mimeType
+}
+

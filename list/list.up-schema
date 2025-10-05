@@ -1,0 +1,142 @@
+schema list
+version 1.0.0
+description "List generation and manipulation functions"
+
+functions {
+  generate {
+    description "Generates a list by repeating a template"
+    parameters {
+      count {
+        type int
+        required!bool true
+        description "Number of items to generate"
+      }
+      template {
+        type any
+        required!bool true
+        description "Template object or value to repeat"
+      }
+    }
+    returns {
+      type list
+      description "Generated list"
+    }
+    notes!2 ```
+      The template is evaluated for each item with $self context:
+      - $self.number: 1-based index
+      - $self.index: 0-based index
+      - $self.first: true if first item
+      - $self.last: true if last item
+      - $self.count: total count
+      ```
+  }
+
+  join {
+    description "Joins list items into a string"
+    parameters {
+      items {
+        type list
+        required!bool true
+        description "List to join"
+      }
+      separator {
+        type string
+        required!bool false
+        default ", "
+        description "Separator between items"
+      }
+    }
+    returns {
+      type string
+      description "Joined string"
+    }
+  }
+
+  slice {
+    description "Extracts a portion of a list"
+    parameters {
+      items {
+        type list
+        required!bool true
+        description "Source list"
+      }
+      start {
+        type int
+        required!bool false
+        default 0
+        description "Start index (inclusive)"
+      }
+      end {
+        type int
+        required!bool false
+        description "End index (exclusive, default: list length)"
+      }
+    }
+    returns {
+      type list
+      description "Sliced list"
+    }
+  }
+
+  length {
+    description "Returns the length of a list"
+    parameters {
+      items {
+        type list
+        required!bool true
+        description "List to measure"
+      }
+    }
+    returns {
+      type int
+      description "Number of items in list"
+    }
+  }
+
+  contains {
+    description "Checks if a list contains a value"
+    parameters {
+      items {
+        type list
+        required!bool true
+        description "List to search"
+      }
+      value {
+        type any
+        required!bool true
+        description "Value to find"
+      }
+    }
+    returns {
+      type bool
+      description "True if value is in list, false otherwise"
+    }
+  }
+
+  index {
+    description "Returns the index of a value in a list"
+    parameters {
+      items {
+        type list
+        required!bool true
+        description "List to search"
+      }
+      value {
+        type any
+        required!bool true
+        description "Value to find"
+      }
+    }
+    returns {
+      type int
+      description "Index of value, or -1 if not found"
+    }
+  }
+}
+
+metadata {
+  author "UP Language Team"
+  license MIT
+  repository https://github.com/uplang/ns
+}
+

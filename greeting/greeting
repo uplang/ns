@@ -1,0 +1,42 @@
+#!/bin/bash
+# Example SNAP namespace plugin
+# Demonstrates the namespace plugin protocol
+
+# Read JSON input from stdin
+INPUT=$(cat)
+
+# Parse using jq (or fall back to basic parsing)
+if command -v jq &> /dev/null; then
+    FUNCTION=$(echo "$INPUT" | jq -r '.function')
+    NAME=$(echo "$INPUT" | jq -r '.params.positional[0] // .params.named.name // "World"')
+    EXCITED=$(echo "$INPUT" | jq -r '.params.named.excited // "true"')
+else
+    # Basic fallback without jq
+    FUNCTION=$(echo "$INPUT" | grep -o '"function":"[^"]*"' | cut -d'"' -f4)
+    NAME="World"
+fi
+
+# Handle function calls
+case "$FUNCTION" in
+    hello)
+        if [ "$EXCITED" = "true" ]; then
+            echo "{\"value\": \"Hello, $NAME!\", \"type\": \"string\"}"
+        else
+            echo "{\"value\": \"Hello, $NAME\", \"type\": \"string\"}"
+        fi
+        exit 0
+        ;;
+    goodbye)
+        echo "{\"value\": \"Goodbye, $NAME!\", \"type\": \"string\"}"
+        exit 0
+        ;;
+    wave)
+        echo "{\"value\": \"👋 $NAME\", \"type\": \"string\"}"
+        exit 0
+        ;;
+    *)
+        echo "{\"error\": \"Unknown function: $FUNCTION\", \"code\": \"UNKNOWN_FUNCTION\"}"
+        exit 1
+        ;;
+esac
+

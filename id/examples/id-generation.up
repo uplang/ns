@@ -1,0 +1,16 @@
+# ID Namespace Examples
+# Testing all ID generation functions
+
+!use [id]
+
+# Generate various types of IDs
+user_id $id.uuid
+request_id $id.ulid
+session_id $id.nanoid(size=16)
+snowflake_id!int $id.snowflake(worker=1, datacenter=1)
+
+# Multiple IDs for different purposes
+order_id $id.uuid
+product_id $id.ulid
+token $id.nanoid(size=32)
+

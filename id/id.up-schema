@@ -1,0 +1,79 @@
+schema id
+version 1.0.0
+description "ID generation functions for unique identifiers"
+
+functions {
+  uuid {
+    description "Generates a UUID (v4)"
+    returns {
+      type string
+      description "UUID in standard format (e.g., 550e8400-e29b-41d4-a716-446655440000)"
+    }
+  }
+
+  ulid {
+    description "Generates a ULID (Universally Unique Lexicographically Sortable Identifier)"
+    returns {
+      type string
+      description "ULID in standard format (e.g., 01ARZ3NDEKTSV4RRFFQ69G5FAV)"
+    }
+    notes!2 ```
+      ULIDs are:
+      - Sortable by timestamp
+      - Case insensitive
+      - URL safe
+      - 26 characters long
+      ```
+  }
+
+  nanoid {
+    description "Generates a NanoID"
+    parameters {
+      size {
+        type int
+        required!bool false
+        default 21
+        description "Length of the generated ID (default 21)"
+      }
+      alphabet {
+        type string
+        required!bool false
+        default "_-0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        description "Custom alphabet to use"
+      }
+    }
+    returns {
+      type string
+      description "NanoID string"
+    }
+  }
+
+  snowflake {
+    description "Generates a Twitter Snowflake ID"
+    parameters {
+      machine_id {
+        type int
+        required!bool false
+        default 1
+        description "Machine/node ID (0-1023)"
+      }
+    }
+    returns {
+      type int
+      description "Snowflake ID as 64-bit integer"
+    }
+    notes!2 ```
+      Snowflake IDs are:
+      - 64-bit integers
+      - Time-ordered
+      - Decentralized (machine_id prevents collisions)
+      - High performance
+      ```
+  }
+}
+
+metadata {
+  author "UP Language Team"
+  license MIT
+  repository https://github.com/uplang/ns
+}

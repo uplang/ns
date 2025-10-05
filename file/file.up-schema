@@ -1,0 +1,128 @@
+schema file
+version 1.0.0
+description "File system operations"
+
+functions {
+  read {
+    description "Reads the contents of a file"
+    parameters {
+      path {
+        type string
+        required!bool true
+        description "Path to file"
+      }
+    }
+    returns {
+      type string
+      description "File contents as string"
+    }
+  }
+
+  exists {
+    description "Checks if a file or directory exists"
+    parameters {
+      path {
+        type string
+        required!bool true
+        description "Path to check"
+      }
+    }
+    returns {
+      type bool
+      description "True if path exists, false otherwise"
+    }
+  }
+
+  list {
+    description "Lists files in a directory"
+    parameters {
+      path {
+        type string
+        required!bool true
+        description "Directory path"
+      }
+      pattern {
+        type string
+        required!bool false
+        default "*"
+        description "Glob pattern to filter files"
+      }
+    }
+    returns {
+      type list
+      description "List of file names"
+    }
+  }
+
+  basename {
+    description "Returns the base name of a path"
+    parameters {
+      path {
+        type string
+        required!bool true
+        description "File path"
+      }
+    }
+    returns {
+      type string
+      description "Base name (file name without directory)"
+    }
+  }
+
+  dirname {
+    description "Returns the directory part of a path"
+    parameters {
+      path {
+        type string
+        required!bool true
+        description "File path"
+      }
+    }
+    returns {
+      type string
+      description "Directory path"
+    }
+  }
+
+  ext {
+    description "Returns the file extension"
+    parameters {
+      path {
+        type string
+        required!bool true
+        description "File path"
+      }
+    }
+    returns {
+      type string
+      description "File extension (including the dot)"
+    }
+  }
+
+  join {
+    description "Joins path components"
+    parameters {
+      parts {
+        type list
+        required!bool true
+        description "Path components to join"
+      }
+    }
+    returns {
+      type string
+      description "Joined path"
+    }
+  }
+}
+
+metadata {
+  author "UP Language Team"
+  license MIT
+  repository https://github.com/uplang/ns
+
+  security_note!2 ```
+    File operations are restricted to paths accessible by the process.
+    Paths are not validated for security - use with caution in untrusted contexts.
+    ```
+}
+

@@ -1,0 +1,247 @@
+schema math
+version 1.0.0
+description "Mathematical operations"
+
+functions {
+  add {
+    description "Adds two numbers"
+    parameters {
+      a {
+        type float
+        required!bool true
+        description "First number"
+      }
+      b {
+        type float
+        required!bool true
+        description "Second number"
+      }
+    }
+    returns {
+      type float
+      description "Sum of a and b"
+    }
+  }
+
+  sub {
+    description "Subtracts two numbers"
+    parameters {
+      a {
+        type float
+        required!bool true
+        description "First number"
+      }
+      b {
+        type float
+        required!bool true
+        description "Second number"
+      }
+    }
+    returns {
+      type float
+      description "Difference (a - b)"
+    }
+  }
+
+  mul {
+    description "Multiplies two numbers"
+    parameters {
+      a {
+        type float
+        required!bool true
+        description "First number"
+      }
+      b {
+        type float
+        required!bool true
+        description "Second number"
+      }
+    }
+    returns {
+      type float
+      description "Product of a and b"
+    }
+  }
+
+  div {
+    description "Divides two numbers"
+    parameters {
+      a {
+        type float
+        required!bool true
+        description "Numerator"
+      }
+      b {
+        type float
+        required!bool true
+        description "Denominator (must be non-zero)"
+      }
+    }
+    returns {
+      type float
+      description "Quotient (a / b)"
+    }
+  }
+
+  mod {
+    description "Returns the modulo (remainder)"
+    parameters {
+      a {
+        type int
+        required!bool true
+        description "Dividend"
+      }
+      b {
+        type int
+        required!bool true
+        description "Divisor (must be non-zero)"
+      }
+    }
+    returns {
+      type int
+      description "Remainder (a % b)"
+    }
+  }
+
+  pow {
+    description "Raises a number to a power"
+    parameters {
+      x {
+        type float
+        required!bool true
+        description "Base"
+      }
+      y {
+        type float
+        required!bool true
+        description "Exponent"
+      }
+    }
+    returns {
+      type float
+      description "x raised to the power y"
+    }
+  }
+
+  sqrt {
+    description "Returns the square root"
+    parameters {
+      x {
+        type float
+        required!bool true
+        description "Number (must be non-negative)"
+      }
+    }
+    returns {
+      type float
+      description "Square root of x"
+    }
+  }
+
+  abs {
+    description "Returns the absolute value"
+    parameters {
+      x {
+        type float
+        required!bool true
+        description "Number"
+      }
+    }
+    returns {
+      type float
+      description "Absolute value of x"
+    }
+  }
+
+  min {
+    description "Returns the minimum of two numbers"
+    parameters {
+      a {
+        type float
+        required!bool true
+        description "First number"
+      }
+      b {
+        type float
+        required!bool true
+        description "Second number"
+      }
+    }
+    returns {
+      type float
+      description "Minimum of a and b"
+    }
+  }
+
+  max {
+    description "Returns the maximum of two numbers"
+    parameters {
+      a {
+        type float
+        required!bool true
+        description "First number"
+      }
+      b {
+        type float
+        required!bool true
+        description "Second number"
+      }
+    }
+    returns {
+      type float
+      description "Maximum of a and b"
+    }
+  }
+
+  ceil {
+    description "Rounds up to the nearest integer"
+    parameters {
+      x {
+        type float
+        required!bool true
+        description "Number"
+      }
+    }
+    returns {
+      type float
+      description "Smallest integer >= x"
+    }
+  }
+
+  floor {
+    description "Rounds down to the nearest integer"
+    parameters {
+      x {
+        type float
+        required!bool true
+        description "Number"
+      }
+    }
+    returns {
+      type float
+      description "Largest integer <= x"
+    }
+  }
+
+  round {
+    description "Rounds to the nearest integer"
+    parameters {
+      x {
+        type float
+        required!bool true
+        description "Number"
+      }
+    }
+    returns {
+      type float
+      description "Nearest integer to x"
+    }
+  }
+}
+
+metadata {
+  author "UP Language Team"
+  license MIT
+  repository https://github.com/uplang/ns
+}
+

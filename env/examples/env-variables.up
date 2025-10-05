@@ -1,0 +1,21 @@
+# Environment Namespace Examples
+# Testing environment variable access
+
+!use [env]
+
+# Get environment variables with defaults
+home_dir $env.get(name="HOME", default="/home/user")
+user_name $env.get(name="USER", default="unknown")
+shell $env.get(name="SHELL", default="/bin/bash")
+
+# Check if variables exist
+has_path!bool $env.has(name="PATH")
+has_custom!bool $env.has(name="MY_CUSTOM_VAR")
+
+# Get all environment variables
+all_vars $env.all
+
+# Get with fallback
+api_url $env.get(name="API_URL", default="https://api.example.com")
+debug_mode $env.get(name="DEBUG", default="false")
+

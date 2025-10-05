@@ -1,0 +1,106 @@
+schema random
+version 1.0.0
+description "Random value generation functions"
+
+functions {
+  int {
+    description "Generates a random integer"
+    parameters {
+      min {
+        type int
+        required!bool false
+        default 0
+        description "Minimum value (inclusive)"
+      }
+      max {
+        type int
+        required!bool false
+        default 100
+        description "Maximum value (inclusive)"
+      }
+    }
+    returns {
+      type int
+      description "Random integer between min and max"
+    }
+  }
+
+  float {
+    description "Generates a random floating-point number"
+    parameters {
+      min {
+        type float
+        required!bool false
+        default 0.0
+        description "Minimum value (inclusive)"
+      }
+      max {
+        type float
+        required!bool false
+        default 1.0
+        description "Maximum value (exclusive)"
+      }
+    }
+    returns {
+      type float
+      description "Random float between min and max"
+    }
+  }
+
+  bool {
+    description "Generates a random boolean"
+    returns {
+      type bool
+      description "Random true or false"
+    }
+  }
+
+  choice {
+    description "Selects a random element from a list"
+    parameters {
+      items {
+        type list
+        required!bool true
+        description "List of items to choose from"
+      }
+    }
+    returns {
+      type any
+      description "Randomly selected item from the list"
+    }
+  }
+
+  bytes {
+    description "Generates random bytes as hex string"
+    parameters {
+      size {
+        type int
+        required!bool false
+        default 16
+        description "Number of bytes to generate"
+      }
+    }
+    returns {
+      type string
+      description "Hex-encoded random bytes"
+    }
+    notes!2 ```
+      Useful for:
+      - Session tokens
+      - API keys (non-cryptographic)
+      - Test data
+      - Random seeds
+      ```
+  }
+}
+
+metadata {
+  author "UP Language Team"
+  license MIT
+  repository https://github.com/uplang/ns
+
+  security_note!2 ```
+    This namespace uses math/rand for random generation.
+    For cryptographic purposes, use a dedicated secure random namespace.
+    ```
+}

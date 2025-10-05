@@ -1,0 +1,29 @@
+# Math Namespace Examples
+# Testing mathematical operations
+
+!use [math]
+
+# Basic arithmetic
+sum!int $math.add(a=10, b=5)
+difference!int $math.sub(a=10, b=5)
+product!int $math.mul(a=10, b=5)
+quotient!float $math.div(a=10, b=3)
+
+# More operations
+power!float $math.pow(base=2, exp=8)
+square_root!float $math.sqrt(n=16)
+absolute!int $math.abs(n=-42)
+
+# Rounding
+rounded!int $math.round(n=3.7)
+ceiling!int $math.ceil(n=3.2)
+floor!int $math.floor(n=3.9)
+
+# Min/Max
+minimum!int $math.min(a=5, b=10)
+maximum!int $math.max(a=5, b=10)
+
+# Constants
+pi!float $math.pi
+e!float $math.e
+

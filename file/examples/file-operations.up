@@ -1,0 +1,14 @@
+# File Namespace Examples
+# Testing all file system operations
+
+!use [file]
+
+# Path operations (these work without actual files)
+filename $file.basename(path="/path/to/file.txt")
+directory $file.dirname(path="/path/to/file.txt")
+extension $file.ext(path="document.pdf")
+full_path $file.join(parts=[home, user, docs, file.txt])
+
+# Note: File reading and listing operations require actual files
+# These would be tested in integration tests with temporary files
+

@@ -1,0 +1,128 @@
+# UP Namespace Schema
+# Schema for the greeting namespace plugin
+
+namespace greeting
+
+version 1.0.0
+description "Simple greeting generator demonstrating UP namespace plugins"
+
+functions {
+  hello {
+    description "Generate a hello greeting"
+
+    params {
+      name!string {
+        description "Name to greet"
+        default World
+        required!bool false
+        example Alice
+      }
+
+      excited!bool {
+        description "Add exclamation mark"
+        default true
+        required!bool false
+      }
+    }
+
+    returns!string {
+      description "Greeting message"
+      example "Hello, Alice!"
+    }
+
+    examples [
+      {
+        call $greeting.hello(Alice)
+        result "Hello, Alice!"
+      }
+      {
+        call "$greeting.hello(Bob, excited=false)"
+        result "Hello, Bob"
+      }
+      {
+        call $greeting.hello
+        result "Hello, World!"
+        note "Uses default name"
+      }
+    ]
+  }
+
+  goodbye {
+    description "Generate a goodbye message"
+
+    params {
+      name!string {
+        description "Name to say goodbye to"
+        default World
+        required!bool false
+      }
+    }
+
+    returns!string {
+      description "Farewell message"
+      example "Goodbye, Alice!"
+    }
+
+    examples [
+      {
+        call $greeting.goodbye(Alice)
+        result "Goodbye, Alice!"
+      }
+      {
+        call $greeting.goodbye
+        result "Goodbye, World!"
+      }
+    ]
+  }
+
+  wave {
+    description "Wave emoji greeting"
+
+    params {
+      name!string {
+        description "Name to wave at"
+        default World
+        required!bool false
+      }
+    }
+
+    returns!string {
+      description "Wave greeting with emoji"
+      example "👋 Alice"
+    }
+
+    examples [
+      {
+        call $greeting.wave(Alice)
+        result "👋 Alice"
+      }
+    ]
+  }
+}
+
+metadata {
+  author "UP Examples"
+  repository https://github.com/uplang/ns
+  license MIT
+
+  tags [example, greeting, simple]
+
+  builtin!bool false
+  safe!bool true
+
+  requires {
+    up_version ">=1.0.0"
+    executables [bash]
+    optional_executables [jq]
+  }
+
+  notes!2 ```
+    This is a simple example namespace plugin demonstrating:
+    - Shell script as namespace provider
+    - JSON protocol for input/output
+    - Multiple functions in one namespace
+    - Parameter handling with defaults
+    - UP schema documentation
+    ```
+}
+

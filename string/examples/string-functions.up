@@ -1,0 +1,34 @@
+# String Namespace Examples
+# Testing all string manipulation functions
+
+!use [string]
+
+# Case transformations
+uppercase $string.upper(s="hello world")
+lowercase $string.lower(s="HELLO WORLD")
+titlecase $string.title(s="hello world")
+
+# Trimming
+trimmed $string.trim(s="  hello  ")
+no_prefix $string.trimPrefix(s="https://example.com", prefix="https://")
+no_suffix $string.trimSuffix(s="file.txt", suffix=".txt")
+
+# Splitting and joining
+parts $string.split(s="a,b,c", sep=",")
+joined $string.join(items=[a, b, c], sep=",")
+
+# Replacing
+replaced_once $string.replace(s="hello world", old="world", new="there")
+replaced_all $string.replaceAll(s="foo foo foo", old="foo", new="bar")
+
+# Checking
+has_world!bool $string.contains(s="hello world", substr="world")
+is_https!bool $string.hasPrefix(s="https://example.com", prefix="https://")
+is_txt!bool $string.hasSuffix(s="file.txt", suffix=".txt")
+
+# Manipulation
+substring $string.slice(s="hello", start=0, end=2)
+repeated $string.repeat(s="ha", count=3)
+reversed $string.reverse(s="hello")
+length!int $string.length(s="hello world")
+
