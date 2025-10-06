@@ -129,9 +129,7 @@ func handleExt(params map[string]any) (any, string, error) {
 
 	ext := filepath.Ext(path)
 	// Remove leading dot
-	if strings.HasPrefix(ext, ".") {
-		ext = ext[1:]
-	}
+	ext = strings.TrimPrefix(ext, ".")
 
 	return ext, "string", nil
 }
