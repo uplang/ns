@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"math/big"
 	"os"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -129,7 +130,7 @@ func getInt64(params map[string]any, key string, defaultValue int64) int64 {
 }
 
 func getTimestamp() int64 {
-	return os.Times().Sys().(int64) // Simplified
+	return time.Now().UnixMilli()
 }
 
 func getRandomHex(n int) int64 {
