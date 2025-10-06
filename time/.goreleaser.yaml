@@ -58,7 +58,6 @@ release:
   draft: false
   prerelease: auto
   mode: keep-existing
-  name_template: "Namespace: time v{{.Version}}"
 
 brews:
   - name: up-ns-time

@@ -58,7 +58,6 @@ release:
   draft: false
   prerelease: auto
   mode: keep-existing
-  name_template: "Namespace: id v{{.Version}}"
 
 brews:
   - name: up-ns-id
