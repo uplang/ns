@@ -42,4 +42,19 @@ $(eval $(call NS_TARGET,fmt))
 test-ci: ## Run CI tests locally using act (requires: brew install act)
 	act --container-architecture linux/amd64 -j test
 
+.PHONY: bump-patch-version
+bump-patch-version: ## Bump patch version (e.g., v0.0.1 -> v0.0.2) and create tag locally
+	@$(MAKE) tag NEW_VERSION=$(shell go tool svu patch)
+
+.PHONY: bump-minor-version
+bump-minor-version: ## Bump minor version (e.g., v0.0.1 -> v0.1.0) and create tag locally
+	@$(MAKE) tag NEW_VERSION=$(shell go tool svu minor)
+
+.PHONY: tag
+tag: NEW_VERSION ?= $(shell go tool svu patch)
+tag:
+	@echo "Creating tag: $(NEW_VERSION)"
+	git tag -a $(NEW_VERSION) -m "Release version $(NEW_VERSION)"
+	@echo "Tag created. Push with: git push origin $(NEW_VERSION)"
+
 .DEFAULT_GOAL := build

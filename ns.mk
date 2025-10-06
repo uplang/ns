@@ -20,14 +20,14 @@ lint: ## Run linter
 	GOFLAGS="-buildvcs=false" golangci-lint run --timeout=5m ./...
 
 build: ## Build the namespace binary
-	go build -v -o up-$(NAMESPACE) .
+	go build -v -o up-ns-$(NAMESPACE) .
 
 examples: ## List examples
 	@ls -1 examples/*.up 2>/dev/null || echo "No examples found"
 
 clean: ## Clean build artifacts
 	go clean
-	rm -f up-$(NAMESPACE)
+	rm -f up-ns-$(NAMESPACE)
 
 install: ## Install dependencies
 	go mod download
