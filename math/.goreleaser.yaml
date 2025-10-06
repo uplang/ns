@@ -57,6 +57,7 @@ release:
     name: ns
   draft: false
   prerelease: auto
+  mode: keep-existing
   name_template: "Namespace: math v{{.Version}}"
 
 brews:
