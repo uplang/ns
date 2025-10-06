@@ -9,8 +9,8 @@ permissions:
   contents: write
 
 jobs:
-  release:
-    name: Release Namespaces
+  release-env:
+    name: Release env namespace
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -23,12 +23,250 @@ jobs:
         with:
           go-version: '1.25'
 
+      - name: Install dependencies
+        working-directory: env
+        run: go mod download
+
+      - name: Run tests
+        working-directory: env
+        run: go test -v ./...
+
       - name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@v5
-        with:
-          distribution: goreleaser
-          version: latest
-          args: release --clean
+        working-directory: env
+        run: go tool goreleaser release --clean
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HOMEBREW_TAP_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}
+
+  release-fake:
+    name: Release fake namespace
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.25'
+
+      - name: Install dependencies
+        working-directory: fake
+        run: go mod download
+
+      - name: Run tests
+        working-directory: fake
+        run: go test -v ./...
+
+      - name: Run GoReleaser
+        working-directory: fake
+        run: go tool goreleaser release --clean
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HOMEBREW_TAP_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}
+
+  release-file:
+    name: Release file namespace
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.25'
+
+      - name: Install dependencies
+        working-directory: file
+        run: go mod download
+
+      - name: Run tests
+        working-directory: file
+        run: go test -v ./...
+
+      - name: Run GoReleaser
+        working-directory: file
+        run: go tool goreleaser release --clean
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HOMEBREW_TAP_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}
+
+  release-id:
+    name: Release id namespace
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.25'
+
+      - name: Install dependencies
+        working-directory: id
+        run: go mod download
+
+      - name: Run tests
+        working-directory: id
+        run: go test -v ./...
+
+      - name: Run GoReleaser
+        working-directory: id
+        run: go tool goreleaser release --clean
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HOMEBREW_TAP_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}
+
+  release-list:
+    name: Release list namespace
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.25'
+
+      - name: Install dependencies
+        working-directory: list
+        run: go mod download
+
+      - name: Run tests
+        working-directory: list
+        run: go test -v ./...
+
+      - name: Run GoReleaser
+        working-directory: list
+        run: go tool goreleaser release --clean
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HOMEBREW_TAP_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}
+
+  release-math:
+    name: Release math namespace
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.25'
+
+      - name: Install dependencies
+        working-directory: math
+        run: go mod download
+
+      - name: Run tests
+        working-directory: math
+        run: go test -v ./...
+
+      - name: Run GoReleaser
+        working-directory: math
+        run: go tool goreleaser release --clean
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HOMEBREW_TAP_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}
+
+  release-random:
+    name: Release random namespace
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.25'
+
+      - name: Install dependencies
+        working-directory: random
+        run: go mod download
+
+      - name: Run tests
+        working-directory: random
+        run: go test -v ./...
+
+      - name: Run GoReleaser
+        working-directory: random
+        run: go tool goreleaser release --clean
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HOMEBREW_TAP_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}
+
+  release-string:
+    name: Release string namespace
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.25'
+
+      - name: Install dependencies
+        working-directory: string
+        run: go mod download
+
+      - name: Run tests
+        working-directory: string
+        run: go test -v ./...
+
+      - name: Run GoReleaser
+        working-directory: string
+        run: go tool goreleaser release --clean
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HOMEBREW_TAP_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}
+
+  release-time:
+    name: Release time namespace
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.25'
+
+      - name: Install dependencies
+        working-directory: time
+        run: go mod download
+
+      - name: Run tests
+        working-directory: time
+        run: go test -v ./...
+
+      - name: Run GoReleaser
+        working-directory: time
+        run: go tool goreleaser release --clean
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HOMEBREW_TAP_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}
 
