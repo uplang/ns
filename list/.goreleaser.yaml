@@ -39,7 +39,7 @@ archives:
       - list.up-schema
 
 checksum:
-  name_template: 'checksums.txt'
+  name_template: 'checksums-list.txt'
 
 changelog:
   sort: asc
@@ -57,7 +57,7 @@ release:
     name: ns
   draft: false
   prerelease: auto
-  name_template: "list/v{{.Version}}"
+  name_template: "Namespace: list v{{.Version}}"
 
 brews:
   - name: up-ns-list

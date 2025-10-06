@@ -39,7 +39,7 @@ archives:
       - fake.up-schema
 
 checksum:
-  name_template: 'checksums.txt'
+  name_template: 'checksums-fake.txt'
 
 changelog:
   sort: asc
@@ -57,7 +57,7 @@ release:
     name: ns
   draft: false
   prerelease: auto
-  name_template: "fake/v{{.Version}}"
+  name_template: "Namespace: fake v{{.Version}}"
 
 brews:
   - name: up-ns-fake

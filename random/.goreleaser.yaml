@@ -39,7 +39,7 @@ archives:
       - random.up-schema
 
 checksum:
-  name_template: 'checksums.txt'
+  name_template: 'checksums-random.txt'
 
 changelog:
   sort: asc
@@ -57,7 +57,7 @@ release:
     name: ns
   draft: false
   prerelease: auto
-  name_template: "random/v{{.Version}}"
+  name_template: "Namespace: random v{{.Version}}"
 
 brews:
   - name: up-ns-random

@@ -39,7 +39,7 @@ archives:
       - env.up-schema
 
 checksum:
-  name_template: 'checksums.txt'
+  name_template: 'checksums-env.txt'
 
 changelog:
   sort: asc
@@ -57,7 +57,7 @@ release:
     name: ns
   draft: false
   prerelease: auto
-  name_template: "env/v{{.Version}}"
+  name_template: "Namespace: env v{{.Version}}"
 
 brews:
   - name: up-ns-env

@@ -39,7 +39,7 @@ archives:
       - time.up-schema
 
 checksum:
-  name_template: 'checksums.txt'
+  name_template: 'checksums-time.txt'
 
 changelog:
   sort: asc
@@ -57,7 +57,7 @@ release:
     name: ns
   draft: false
   prerelease: auto
-  name_template: "time/v{{.Version}}"
+  name_template: "Namespace: time v{{.Version}}"
 
 brews:
   - name: up-ns-time

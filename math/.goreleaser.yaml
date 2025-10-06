@@ -39,7 +39,7 @@ archives:
       - math.up-schema
 
 checksum:
-  name_template: 'checksums.txt'
+  name_template: 'checksums-math.txt'
 
 changelog:
   sort: asc
@@ -57,7 +57,7 @@ release:
     name: ns
   draft: false
   prerelease: auto
-  name_template: "math/v{{.Version}}"
+  name_template: "Namespace: math v{{.Version}}"
 
 brews:
   - name: up-ns-math
