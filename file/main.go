@@ -164,14 +164,19 @@ func sendResponse(value any, valueType string) {
 		Value: value,
 		Type:  valueType,
 	}
-	json.NewEncoder(os.Stdout).Encode(resp)
+	if err := json.NewEncoder(os.Stdout).Encode(resp); err != nil {
+		fmt.Fprintf(os.Stderr, "Failed to encode response: %v\n", err)
+		os.Exit(1)
+	}
 }
 
 func sendError(message string) {
 	resp := Response{
 		Error: message,
 	}
-	json.NewEncoder(os.Stdout).Encode(resp)
+	if err := json.NewEncoder(os.Stdout).Encode(resp); err != nil {
+		fmt.Fprintf(os.Stderr, "Failed to encode error response: %v\n", err)
+	}
 	os.Exit(1)
 }
 
