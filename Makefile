@@ -54,7 +54,7 @@ bump-minor-version: ## Bump minor version (e.g., v0.0.1 -> v0.1.0) and create ta
 tag: NEW_VERSION ?= $(shell go tool svu patch)
 tag:
 	@echo "Creating tag: $(NEW_VERSION)"
-	git tag -a $(NEW_VERSION) -m "Release version $(NEW_VERSION)"
+	git tag -s $(NEW_VERSION) -m "Release version $(NEW_VERSION)"
 	@echo "Tag created. Push with: git push origin $(NEW_VERSION)"
 
 .DEFAULT_GOAL := build
