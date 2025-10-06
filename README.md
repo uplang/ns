@@ -1,6 +1,16 @@
 # UP Namespaces
 
+[![CI](https://github.com/uplang/ns/actions/workflows/ci.yml/badge.svg)](https://github.com/uplang/ns/actions/workflows/ci.yml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/uplang/ns)](https://goreportcard.com/report/github.com/uplang/ns)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
 Official namespace implementations for the UP language. All namespaces are in this single repository, each in its own directory.
+
+**Quick Links:**
+- 📦 [Quick Start](#quick-start)
+- 📖 [Documentation](#documentation)
+- 🔧 [Development](#creating-custom-namespaces)
+- 🔗 [Go Packages](https://pkg.go.dev/github.com/uplang/ns)
 
 ## Repository Structure
 
