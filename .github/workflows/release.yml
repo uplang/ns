@@ -40,6 +40,7 @@ jobs:
 
   release-fake:
     name: Release fake namespace
+    needs: release-env
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -69,6 +70,7 @@ jobs:
 
   release-file:
     name: Release file namespace
+    needs: release-fake
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -98,6 +100,7 @@ jobs:
 
   release-id:
     name: Release id namespace
+    needs: release-file
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -127,6 +130,7 @@ jobs:
 
   release-list:
     name: Release list namespace
+    needs: release-id
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -156,6 +160,7 @@ jobs:
 
   release-math:
     name: Release math namespace
+    needs: release-list
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -185,6 +190,7 @@ jobs:
 
   release-random:
     name: Release random namespace
+    needs: release-math
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -214,6 +220,7 @@ jobs:
 
   release-string:
     name: Release string namespace
+    needs: release-random
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -243,6 +250,7 @@ jobs:
 
   release-time:
     name: Release time namespace
+    needs: release-string
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
