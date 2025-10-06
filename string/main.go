@@ -5,18 +5,21 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 )
 
 type Request struct {
-	Function string                 `json:"function"`
+	Function string         `json:"function"`
 	Params   map[string]any `json:"params"`
 	Context  map[string]any `json:"context"`
 }
 
 type Response struct {
-	Value any `json:"value"`
-	Type  string      `json:"type"`
-	Error string      `json:"error,omitempty"`
+	Value any    `json:"value"`
+	Type  string `json:"type"`
+	Error string `json:"error,omitempty"`
 }
 
 func main() {
@@ -99,7 +102,7 @@ func handleTitle(params map[string]any) (any, string, error) {
 	if s == "" {
 		return nil, "", fmt.Errorf("s parameter required")
 	}
-	return strings.Title(s), "string", nil
+	return cases.Title(language.English).String(s), "string", nil
 }
 
 func handleTrim(params map[string]any) (any, string, error) {
@@ -331,4 +334,3 @@ func sendError(message string) {
 	}
 	os.Exit(1)
 }
-

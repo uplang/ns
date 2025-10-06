@@ -9,15 +9,15 @@ import (
 )
 
 type Request struct {
-	Function string                 `json:"function"`
+	Function string         `json:"function"`
 	Params   map[string]any `json:"params"`
 	Context  map[string]any `json:"context"`
 }
 
 type Response struct {
-	Value any `json:"value"`
-	Type  string      `json:"type"`
-	Error string      `json:"error,omitempty"`
+	Value any    `json:"value"`
+	Type  string `json:"type"`
+	Error string `json:"error,omitempty"`
 }
 
 var fake faker.Faker
@@ -339,4 +339,3 @@ func sendError(message string) {
 	}
 	os.Exit(1)
 }
-

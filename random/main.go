@@ -9,15 +9,15 @@ import (
 )
 
 type Request struct {
-	Function string                 `json:"function"`
+	Function string         `json:"function"`
 	Params   map[string]any `json:"params"`
 	Context  map[string]any `json:"context"`
 }
 
 type Response struct {
-	Value any `json:"value"`
-	Type  string      `json:"type"`
-	Error string      `json:"error,omitempty"`
+	Value any    `json:"value"`
+	Type  string `json:"type"`
+	Error string `json:"error,omitempty"`
 }
 
 func main() {
@@ -140,15 +140,6 @@ func handleBytes(params map[string]any) (any, string, error) {
 	return fmt.Sprintf("%x", b), "string", nil
 }
 
-func getString(params map[string]any, key, defaultValue string) string {
-	if v, ok := params[key]; ok {
-		if s, ok := v.(string); ok {
-			return s
-		}
-	}
-	return defaultValue
-}
-
 func getInt64(params map[string]any, key string, defaultValue int64) int64 {
 	if v, ok := params[key]; ok {
 		switch val := v.(type) {
@@ -197,4 +188,3 @@ func sendError(message string) {
 	}
 	os.Exit(1)
 }
-

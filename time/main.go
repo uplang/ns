@@ -9,16 +9,16 @@ import (
 
 // Request represents the JSON input from the UP template engine
 type Request struct {
-	Function string                 `json:"function"`
+	Function string         `json:"function"`
 	Params   map[string]any `json:"params"`
 	Context  map[string]any `json:"context"`
 }
 
 // Response represents the JSON output to the UP template engine
 type Response struct {
-	Value any `json:"value"`
-	Type  string      `json:"type"`
-	Error string      `json:"error,omitempty"`
+	Value any    `json:"value"`
+	Type  string `json:"type"`
+	Error string `json:"error,omitempty"`
 }
 
 func main() {
@@ -219,4 +219,3 @@ func sendError(message string) {
 	}
 	os.Exit(1)
 }
-

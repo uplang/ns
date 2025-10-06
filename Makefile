@@ -1,7 +1,8 @@
 # Makefile for UP Namespaces Repository
 
 # Find all namespace directories with go.mod
-NAMESPACES := $(shell find . -maxdepth 2 -name 'go.mod' -exec dirname {} \; | sed 's|^\./||' | sort)
+
+NAMESPACES := $(patsubst %/,%,$(dir $(wildcard */go.mod)))
 
 .PHONY: help
 help: ## Show this help message
@@ -10,32 +11,50 @@ help: ## Show this help message
 	@echo 'Available targets:'
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "  %-15s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
+TEST_NAMESPACES := $(patsubst %,test-%,$(NAMESPACES))
+
 .PHONY: test
-test: ## Run tests for all namespaces
-	@for ns in $(NAMESPACES); do \
-		if [ -f $$ns/Makefile ]; then \
-			echo "Testing $$ns..."; \
-			$(MAKE) -C $$ns test || exit 1; \
-		fi \
-	done
+test: $(TEST_NAMESPACES) ## Run tests for all namespaces
+
+.PHONY: $(TEST_NAMESPACES)
+$(TEST_NAMESPACES):
+	$(MAKE) -C $(patsubst test-%,%,$@) test
+
+LINT_NAMESPACES := $(patsubst %,lint-%,$(NAMESPACES))
+
+.PHONY: lint
+lint: $(LINT_NAMESPACES) ## Run linter for all namespaces
+
+.PHONY: $(LINT_NAMESPACES)
+$(LINT_NAMESPACES):
+	$(MAKE) -C $(patsubst lint-%,%,$@) lint
+
+BUILD_NAMESPACES := $(patsubst %,build-%,$(NAMESPACES))
 
 .PHONY: build
-build: test ## Build all namespaces
-	@for ns in $(NAMESPACES); do \
-		if [ -f $$ns/Makefile ]; then \
-			echo "Building $$ns..."; \
-			$(MAKE) -C $$ns build || exit 1; \
-		fi \
-	done
+build: test $(BUILD_NAMESPACES) ## Build all namespaces
+
+.PHONY: $(BUILD_NAMESPACES)
+$(BUILD_NAMESPACES):
+	$(MAKE) -C $(patsubst build-%,%,$@) build
+
+CLEAN_NAMESPACES := $(patsubst %,clean-%,$(NAMESPACES))
 
 .PHONY: clean
-clean: ## Clean all namespaces
-	@for ns in $(NAMESPACES); do \
-		if [ -f $$ns/Makefile ]; then \
-			echo "Cleaning $$ns..."; \
-			$(MAKE) -C $$ns clean || exit 1; \
-		fi \
-	done
+clean: $(CLEAN_NAMESPACES) ## Clean all namespaces
+
+.PHONY: $(CLEAN_NAMESPACES)
+$(CLEAN_NAMESPACES):
+	$(MAKE) -C $(patsubst clean-%,%,$@) clean
+
+FMT_NAMESPACES := $(patsubst %,fmt-%,$(NAMESPACES))
+
+.PHONY: fmt
+fmt: $(FMT_NAMESPACES) ## FMT all namespaces
+
+.PHONY: $(FMT_NAMESPACES)
+$(FMT_NAMESPACES):
+	$(MAKE) -C $(patsubst fmt-%,%,$@) fmt
 
 .PHONY: test-ci
 test-ci: ## Run CI tests locally using act (requires: brew install act)

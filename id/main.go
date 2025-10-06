@@ -12,15 +12,15 @@ import (
 )
 
 type Request struct {
-	Function string                 `json:"function"`
+	Function string         `json:"function"`
 	Params   map[string]any `json:"params"`
 	Context  map[string]any `json:"context"`
 }
 
 type Response struct {
-	Value any `json:"value"`
-	Type  string      `json:"type"`
-	Error string      `json:"error,omitempty"`
+	Value any    `json:"value"`
+	Type  string `json:"type"`
+	Error string `json:"error,omitempty"`
 }
 
 func main() {
@@ -85,8 +85,8 @@ func handleNanoID(params map[string]any) (any, string, error) {
 func handleSnowflake(params map[string]any) (any, string, error) {
 	// Simplified Snowflake ID (timestamp + worker + sequence)
 	timestamp := getTimestamp()
-	worker := getInt64(params, "worker", 0) & 0x3FF  // 10 bits
-	sequence := getInt64(params, "sequence", getRandomInt64(4096)) & 0xFFF  // 12 bits
+	worker := getInt64(params, "worker", 0) & 0x3FF                        // 10 bits
+	sequence := getInt64(params, "sequence", getRandomInt64(4096)) & 0xFFF // 12 bits
 
 	id := (timestamp << 22) | (worker << 12) | sequence
 	return id, "int", nil
@@ -164,4 +164,3 @@ func sendError(message string) {
 	}
 	os.Exit(1)
 }
-
