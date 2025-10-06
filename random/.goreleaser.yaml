@@ -35,7 +35,6 @@ archives:
       {{- .Os }}_
       {{- .Arch }}
     files:
-      - ../LICENSE
       - README.md
       - random.up-schema
 
